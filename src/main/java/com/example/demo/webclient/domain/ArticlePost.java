@@ -5,8 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Employee {
+public class ArticlePost {
     private int id;
-    private String name;
-    private int age;
+    private String userId;
+    private String title;
+    private String body;
 }
