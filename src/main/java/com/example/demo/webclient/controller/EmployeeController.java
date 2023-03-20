@@ -19,8 +19,12 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping("/{id}")
-    public Mono<Employee> getEmployeeById(@PathVariable("id") Integer id) {
+    public Mono<String> getEmployeeById(@PathVariable("id") Integer id) {
         log.info("EmployeeController: employee controller (id={})", id);
-        return employeeService.getEmployee(id);
+        return employeeService.getEmployee(id).log()
+                .flatMap(s -> {
+                    log.info("response from remote api call: " + s);
+                    return Mono.just("return value to servlet");
+                });
     }
 }
