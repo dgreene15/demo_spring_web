@@ -1,5 +1,6 @@
 package com.example.demo.webclient.controller;
 
+import com.example.demo.webclient.domain.ArticlePost;
 import com.example.demo.webclient.service.ArticlePostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,11 @@ public class ArticlePostsController {
     ArticlePostService articlePostService;
 
     @GetMapping("/{id}")
-    public Mono<String> getArticlePostById(@PathVariable("id") Integer id) {
+    public Mono<ArticlePost> getArticlePostById(@PathVariable("id") Integer id) {
         log.info("ArticlePostsController:  controller (id={})", id);
 
         return articlePostService.getArticlePost(id)
-                .log()
+              //  .log()
                 .doOnNext(s -> log.info("response: " + s));
     }
 }

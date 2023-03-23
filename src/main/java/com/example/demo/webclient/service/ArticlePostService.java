@@ -1,5 +1,6 @@
 package com.example.demo.webclient.service;
 
+import com.example.demo.webclient.domain.ArticlePost;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,13 @@ public class ArticlePostService {
     @Autowired
     private WebClient webClientTypicode;
 
-    public Mono<String> getArticlePost(Integer id) {
+    public Mono<ArticlePost> getArticlePost(Integer id) {
         log.info("EmployeeService: (id:{})", id);
 
         return webClientTypicode.get()
                 .uri("posts/" + id)
                 .retrieve()
-                .bodyToMono(String.class);
+                .bodyToMono(ArticlePost.class);
     }
 
 }
