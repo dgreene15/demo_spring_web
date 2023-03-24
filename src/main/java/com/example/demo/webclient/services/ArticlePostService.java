@@ -1,5 +1,6 @@
-package com.example.demo.webclient.service;
+package com.example.demo.webclient.services;
 
+import com.example.demo.webclient.clients.TypicodeClient;
 import com.example.demo.webclient.domain.ArticlePost;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +13,12 @@ import reactor.core.publisher.Mono;
 public class ArticlePostService {
 
     @Autowired
-    private WebClient webClientTypicode;
+    TypicodeClient typicodeClient;
 
     public Mono<ArticlePost> getArticlePost(Integer id) {
         log.info("EmployeeService: (id:{})", id);
 
-        return webClientTypicode.get()
-                .uri("posts/" + id)
-                .retrieve()
-                .bodyToMono(ArticlePost.class);
+        return typicodeClient.getPostById(id);
     }
 
 }
