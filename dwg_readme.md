@@ -6,11 +6,16 @@
 * Custom Prometheus metric
 
 ## Setup
+* Spring Boot 3.0.4
+* Swagger 3 (openapi)
+
+## Access
 * http://localhost:8080/employees/1
 * https://jsonplaceholder.typicode.com/posts/1
+* http://localhost:8080/v3/api-docs
+* http://localhost:8080/swagger-ui/index.html
 
 ## Next Steps
-* Create swagger documentation
 * Add actuator and metrics
 * Add version page for app
 * Rewrite getPostById to handle missing id (use Optional); currently service gives 404 and we give 500
