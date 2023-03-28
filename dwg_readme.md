@@ -14,6 +14,8 @@
 * https://jsonplaceholder.typicode.com/posts/1
 * http://localhost:8080/v3/api-docs
 * http://localhost:8080/swagger-ui/index.html
+* http://localhost:8080/actuator/health
+* http://localhost:8080/actuator
 
 ## Next Steps
 * Add actuator and metrics
