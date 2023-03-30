@@ -16,10 +16,10 @@
 * http://localhost:8080/swagger-ui/index.html
 * http://localhost:8080/actuator/health
 * http://localhost:8080/actuator
+* http://localhost:8080/actuator/prometheus
 
 ## Next Steps
 * Add actuator and metrics
-* Add version page for app
 * Rewrite getPostById to handle missing id (use Optional); currently service gives 404 and we give 500
 * Experiment with two webclient calls where either can fail.  Check on doOnError behaviour.
 * Experiment with two webclient calls and use zip.
