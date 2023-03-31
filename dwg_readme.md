@@ -9,6 +9,7 @@
 * Spring Boot 3.0.4
 * Swagger 3 (openapi)
 
+
 ## Access
 * http://localhost:8080/employees/1
 * https://jsonplaceholder.typicode.com/posts/1
@@ -19,8 +20,8 @@
 * http://localhost:8080/actuator/prometheus
 
 ## Next Steps
-* Add actuator and metrics
-* Rewrite getPostById to handle missing id (use Optional); currently service gives 404 and we give 500
+* Rewrite getPostById to handle missing id (use Optional); 
+  * currently service gives 404 and we give 500
 * Experiment with two webclient calls where either can fail.  Check on doOnError behaviour.
 * Experiment with two webclient calls and use zip.
 * Add a custom prometheus metric
@@ -28,6 +29,7 @@
   * https://www.concretepage.com/spring-5/spring-webflux-controller
 
 ## Status
+* 3/30/23 - learned more about exception handling.
 * 3/24/23 - Added test class for WebClient calls.
 * 3/22/23 - Added test class for controller and service
 * 3/19/23 - Initial setup of application.  Started working on controller.

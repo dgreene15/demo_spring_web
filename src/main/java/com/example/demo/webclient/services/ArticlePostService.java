@@ -18,7 +18,8 @@ public class ArticlePostService {
     public Mono<ArticlePost> getArticlePost(Integer id) {
         log.info("EmployeeService: (id:{})", id);
 
-        return typicodeClient.getPostById(id);
+        return typicodeClient.getPostById(id)
+                .doOnError((e) -> Mono.empty());
     }
 
 }
