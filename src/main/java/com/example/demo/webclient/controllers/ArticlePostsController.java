@@ -2,6 +2,7 @@ package com.example.demo.webclient.controllers;
 
 import com.example.demo.webclient.domain.ArticlePost;
 import com.example.demo.webclient.services.ArticlePostService;
+import com.example.demo.webclient.exceptions.ArticleNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -9,10 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -40,4 +38,13 @@ public class ArticlePostsController {
                 .log()
                 .doOnNext(s -> log.info("response: " + s));
     }
+/*
+    @ExceptionHandler(ArticleNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleNotFound(ArticleNotFoundException ex) {
+        log.info("global exception");
+        ArticlePost article = ArticlePost.builder().body("hi from controller exception").build();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(article);
+    }
+ */
 }

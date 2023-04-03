@@ -1,4 +1,4 @@
-package exceptions;
+package com.example.demo.webclient.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
