@@ -22,4 +22,26 @@ public class ArticlePostService {
                 .doOnError((e) -> Mono.empty());
     }
 
+    public Mono<ArticlePost> getTwoArticlePosts(Integer id) {
+        log.info("EmployeeService: (id:{})", id);
+
+        Mono<ArticlePost> articleFromId = typicodeClient.getPostById(id);
+        Mono<ArticlePost> articleFromIdPlusOne = typicodeClient.getPostById(++id);
+
+        return Mono.zip(articleFromId, articleFromIdPlusOne)
+                .flatMap(zipMono -> {
+                    ArticlePost p1 = zipMono.getT1();
+                    ArticlePost p2 = zipMono.getT2();
+
+                    ArticlePost combined = ArticlePost.builder()
+                            .body(p1.getBody() + ":" + p2.getBody())
+                            .title(p1.getTitle() + ":" + p2.getTitle())
+                            .userId(p1.getUserId() + ":" + p2.getUserId())
+                            .id(p1.getId() + p2.getId())
+                            .build();
+
+                    return Mono.just(combined);
+                });
+    }
+
 }

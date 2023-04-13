@@ -20,12 +20,11 @@
 * http://localhost:8080/actuator/prometheus
 
 ## Next Steps
-* Add a custom prometheus metric
-* try cloning project:
-  * https://github.com/devdojoacademy/springboot2-essentials/tree/video13
-  * returns ResponseEntity but orElseThrows is for Optional, see what is happening.
+
+* Add mongodb dependencies and create new controller and services that will connect to Atlas.
+* Mongodb create crud operators for article
+* Do updates on article.
 * Experiment with two webclient calls where either can fail.  Check on doOnError behaviour.
-* Experiment with two webclient calls and use zip.
 * Try a test with webclient with subscribe to see if it makes the call with example from site below:
   * https://www.concretepage.com/spring-5/spring-webflux-controller
 

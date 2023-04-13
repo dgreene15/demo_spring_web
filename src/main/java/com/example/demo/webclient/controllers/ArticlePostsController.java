@@ -27,6 +27,19 @@ public class ArticlePostsController {
 
     Counter requestCounter;
 
+    public ArticlePostsController(MeterRegistry registry) {
+
+        requestCounter = Counter.builder("article.posts.requestcount")
+                .tag("version", "v1")
+                .description("Article Posts Counter")
+                .register(registry);
+
+        Gauge.builder("usercontroller.usercount",fetchUserCount()).
+                tag("version","v1").
+                description("usercontroller descrip").
+                register(registry);
+    }
+
     @Operation(summary="Get a Post by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found the article",
@@ -44,23 +57,29 @@ public class ArticlePostsController {
         return articlePostService.getArticlePost(id)
                 .log()
                 .doOnNext(s -> log.info("response: " + s));
+
+    }
+
+    @Operation(summary="Get a Post by ID and Next One")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found the articles",
+                    content = { @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ArticlePost.class)) }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Article not found",
+                    content = @Content) })
+    @GetMapping("/{id}/fetchAhead")
+    public Mono<ArticlePost> getArticlePostByIdPlusNext(@PathVariable("id") Integer id) {
+        log.info("ArticlePostsController: getArticlePostByIdPlusNext controller (id={})", id);
+
+        return articlePostService.getTwoArticlePosts(id).log();
     }
 
     // supplies user count
     public Supplier<Number> fetchUserCount() {
         return ()->4;
     }
-    public ArticlePostsController(MeterRegistry registry) {
 
-        requestCounter = Counter.builder("article.posts.requestcount")
-                        .tag("version", "v1")
-                                .description("Article Posts Counter")
-                                        .register(registry);
-
-        Gauge.builder("usercontroller.usercount",fetchUserCount()).
-                tag("version","v1").
-                description("usercontroller descrip").
-                register(registry);
-    }
 
 }
