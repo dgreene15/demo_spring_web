@@ -3,6 +3,7 @@ package com.example.demo.webclient.controllers;
 import com.example.demo.webclient.domain.ArticlePost;
 import com.example.demo.webclient.services.ArticlePostService;
 import com.example.demo.webclient.exceptions.ArticleNotFoundException;
+import com.example.demo.webclient.services.MongoService;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
@@ -21,6 +22,9 @@ import java.util.function.Supplier;
 @RequestMapping("/employees")
 @Slf4j
 public class ArticlePostsController {
+
+    @Autowired
+    MongoService service;
 
     @Autowired
     ArticlePostService articlePostService;
@@ -58,6 +62,38 @@ public class ArticlePostsController {
                 .log()
                 .doOnNext(s -> log.info("response: " + s));
 
+    }
+
+    @GetMapping("/tryMongo")
+    public void runMongoTest() {
+        log.info("Deleting all records...");
+        service.deleteAll();
+
+        log.info("adding item...");
+        service.addItem();
+
+        log.info("printing Count...");
+        service.printCount();
+
+        log.info("printing all items...");
+        service.printAllItems();
+
+        log.info("adding test apple");
+        service.addTestItem();
+
+
+        log.info("printing testapple item");
+        service.printByName("testapple");
+
+        log.info("updating testapple...");
+        service.updateItem();
+
+
+        log.info("printing all items...");
+        service.printAllItems();
+
+        log.info("print all item in 'fruit' category");
+        service.printAllItemsByCategory();
     }
 
     @Operation(summary="Get a Post by ID and Next One")

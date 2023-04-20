@@ -20,17 +20,13 @@
 * http://localhost:8080/actuator/prometheus
 
 ## Next Steps
-
-* Add mongodb dependencies and create new controller and services that will connect to Atlas.
+* move property file to external location and add notes in this file for how to setup.
 * Mongodb create crud operators for article
-* Do updates on article.
+* Continue to merge other github project content over so can delete the other GitHub project
+* Create various test classes to demonstrate concepts.
 * Experiment with two webclient calls where either can fail.  Check on doOnError behaviour.
 * Try a test with webclient with subscribe to see if it makes the call with example from site below:
   * https://www.concretepage.com/spring-5/spring-webflux-controller
-
-## Status
-* 4/03/23 - Added global exception handler.
-* 3/30/23 - learned more about exception handling.
-* 3/24/23 - Added test class for WebClient calls.
-* 3/22/23 - Added test class for controller and service
-* 3/19/23 - Initial setup of application.  Started working on controller.
+* Tutorials
+* https://www.baeldung.com/start-here
+* https://www.baeldung.com/get-started-with-java-series
