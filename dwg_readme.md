@@ -8,7 +8,7 @@
 ## Setup
 * Spring Boot 3.0.4
 * Swagger 3 (openapi)
-
+* Property file is local, outside of source control
 
 ## Access
 * http://localhost:8080/employees/1
@@ -20,7 +20,7 @@
 * http://localhost:8080/actuator/prometheus
 
 ## Next Steps
-* move property file to external location and add notes in this file for how to setup.
+
 * Mongodb create crud operators for article
 * Continue to merge other github project content over so can delete the other GitHub project
 * Create various test classes to demonstrate concepts.

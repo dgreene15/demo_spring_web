@@ -16,14 +16,14 @@ public class ArticlePostService {
     TypicodeClient typicodeClient;
 
     public Mono<ArticlePost> getArticlePost(Integer id) {
-        log.info("EmployeeService: (id:{})", id);
+        log.info("getArticlePost: (id:{})", id);
 
         return typicodeClient.getPostById(id)
                 .doOnError((e) -> Mono.empty());
     }
 
     public Mono<ArticlePost> getTwoArticlePosts(Integer id) {
-        log.info("EmployeeService: (id:{})", id);
+        log.info("getTwoArticlePosts: (id:{})", id);
 
         Mono<ArticlePost> articleFromId = typicodeClient.getPostById(id);
         Mono<ArticlePost> articleFromIdPlusOne = typicodeClient.getPostById(++id);

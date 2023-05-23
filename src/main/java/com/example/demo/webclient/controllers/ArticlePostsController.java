@@ -18,13 +18,14 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 import java.util.function.Supplier;
 
+/**
+ * Calls external endpoint using webclient.
+ * Uses Promethus to create custom metric
+ */
 @RestController
-@RequestMapping("/employees")
+@RequestMapping("/articles")
 @Slf4j
 public class ArticlePostsController {
-
-    @Autowired
-    MongoService service;
 
     @Autowired
     ArticlePostService articlePostService;
@@ -62,38 +63,6 @@ public class ArticlePostsController {
                 .log()
                 .doOnNext(s -> log.info("response: " + s));
 
-    }
-
-    @GetMapping("/tryMongo")
-    public void runMongoTest() {
-        log.info("Deleting all records...");
-        service.deleteAll();
-
-        log.info("adding item...");
-        service.addItem();
-
-        log.info("printing Count...");
-        service.printCount();
-
-        log.info("printing all items...");
-        service.printAllItems();
-
-        log.info("adding test apple");
-        service.addTestItem();
-
-
-        log.info("printing testapple item");
-        service.printByName("testapple");
-
-        log.info("updating testapple...");
-        service.updateItem();
-
-
-        log.info("printing all items...");
-        service.printAllItems();
-
-        log.info("print all item in 'fruit' category");
-        service.printAllItemsByCategory();
     }
 
     @Operation(summary="Get a Post by ID and Next One")

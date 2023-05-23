@@ -58,7 +58,9 @@ public class MongoService {
     }
 
     public void updateItem() {
-
+        /*
+         * Example - Query by Example part of Spring
+         */
         Example<ItemDetails> example = Example.of(ItemDetails.from("1", "testapple", 4, "fruit"));
         Optional<ItemDetails> actual = itemRepo.findOne(example);
         //Optional<ItemDetails> itemOptional = itemRepo.findById("63c9e603c98f2049f36d3687");
