@@ -21,7 +21,6 @@
 * http://localhost:8080/actuator/prometheus
 
 ## Next Steps
-* rename this to just web, be any web related stuff
 * add Themeleaf here
 * Move Mongodb to a different repo
 * Mongodb create crud operators for article
