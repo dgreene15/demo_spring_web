@@ -1,6 +1,7 @@
 
 ## Goals
-* Spring webflux application that calls REST APIs.  
+* Spring Boot Web Application 
+  * WebFlux
 * Uses Mockito for testing
 * Has Swagger
 * Custom Prometheus metric
@@ -20,7 +21,9 @@
 * http://localhost:8080/actuator/prometheus
 
 ## Next Steps
-
+* rename this to just web, be any web related stuff
+* add Themeleaf here
+* Move Mongodb to a different repo
 * Mongodb create crud operators for article
 * Continue to merge other github project content over so can delete the other GitHub project
 * Create various test classes to demonstrate concepts.

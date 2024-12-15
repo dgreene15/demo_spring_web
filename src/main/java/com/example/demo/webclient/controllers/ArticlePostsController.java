@@ -26,7 +26,6 @@ import java.util.function.Supplier;
 @RequestMapping("/articles")
 @Slf4j
 public class ArticlePostsController {
-
     @Autowired
     ArticlePostService articlePostService;
 
@@ -85,6 +84,5 @@ public class ArticlePostsController {
     public Supplier<Number> fetchUserCount() {
         return ()->4;
     }
-
 
 }
