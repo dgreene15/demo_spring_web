@@ -2,8 +2,6 @@ package com.example.demo.webclient.controllers;
 
 import com.example.demo.webclient.domain.ArticlePost;
 import com.example.demo.webclient.services.ArticlePostService;
-import com.example.demo.webclient.exceptions.ArticleNotFoundException;
-import com.example.demo.webclient.services.MongoService;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;

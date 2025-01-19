@@ -8,6 +8,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.concurrent.CompletableFuture;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class AsyncHttpTests {
 
     @Test
@@ -19,8 +21,10 @@ public class AsyncHttpTests {
 
         CompletableFuture<HttpResponse<String>> responseFuture = client.sendAsync(request, HttpResponse.BodyHandlers.ofString());
 
-        responseFuture.thenApply(HttpResponse::body)
-                .thenAccept(System.out::println)
+        String response = responseFuture.thenApply(HttpResponse::body)
+                //.thenAccept(System.out::println)
                 .join();
+
+        assertThat(response).contains("userId");
     }
 }

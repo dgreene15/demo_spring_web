@@ -1,7 +1,5 @@
 package com.example.demo.webclient.clients;
 
-
-import com.example.demo.webclient.clients.WebClientDemo;
 import com.example.demo.webclient.domain.Person;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
+
 @ExtendWith(MockitoExtension.class)
 public class MockitoWebClientTests {
     WebClientDemo apiClient;
@@ -43,7 +43,8 @@ public class MockitoWebClientTests {
         when(responseMock.bodyToMono(Person.class)).thenReturn(Mono.just(mockPerson));
 
         Person actualPerson = apiClient.getUserById();
-        System.out.println(actualPerson.toString());
+
+        assertThat(actualPerson).isEqualTo(mockPerson);
     }
 
 }
