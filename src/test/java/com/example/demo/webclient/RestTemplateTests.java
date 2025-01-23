@@ -33,20 +33,19 @@ public class RestTemplateTests {
 
     @Test
     public void testContextLoad() {
-        log.info("Server Port: " + port);
-
-        log.info("Server Port from Value: " + portFromValue);
+        assertThat(port).isEqualTo(portFromValue);
     }
 
     @Test
     public void testWithTestRestTemplate() {
         String url = "http://localhost:" + port + "/greet?name=John";
         ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(response.getBody()).isEqualTo("Hello, John");
 
         String responseObj = restTemplate.getForObject(url, String.class);
-        assertThat(responseObj).contains("Hello, John");
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(response.getBody()).isEqualTo("(inside MyService class) Hello, John");
+        assertThat(responseObj).contains("(inside MyService class) Hello, John");
     }
 }
 

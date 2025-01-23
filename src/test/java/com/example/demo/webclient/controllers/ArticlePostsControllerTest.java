@@ -12,10 +12,7 @@ import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 @ExtendWith(MockitoExtension.class)
-class ArticlePostsControllerTest {
-
-    @InjectMocks
-    ArticlePostsController controller;
+public class ArticlePostsControllerTest {
 
     @Mock
     ArticlePostService serviceMock;
@@ -23,8 +20,11 @@ class ArticlePostsControllerTest {
     @Mock
     ArticlePost articlePostMock;
 
+    @InjectMocks
+    ArticlePostsController controller;
+
     @Test
-    void getArticlePostById() {
+    public void getArticlePostByIdTest() {
         ArticlePost expectedMono = ArticlePost.builder().body("body").title("title").build();
         Mockito.when(serviceMock.getArticlePost(1)).thenReturn(Mono.just(expectedMono));
 

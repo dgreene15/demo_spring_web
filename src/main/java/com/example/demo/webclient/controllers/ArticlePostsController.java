@@ -2,9 +2,6 @@ package com.example.demo.webclient.controllers;
 
 import com.example.demo.webclient.domain.ArticlePost;
 import com.example.demo.webclient.services.ArticlePostService;
-import io.micrometer.core.instrument.Gauge;
-import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.MeterRegistry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
-import java.util.function.Supplier;
 
 /**
  * Calls external endpoint using webclient.
@@ -26,21 +22,6 @@ import java.util.function.Supplier;
 public class ArticlePostsController {
     @Autowired
     ArticlePostService articlePostService;
-
-    Counter requestCounter;
-
-    public ArticlePostsController(MeterRegistry registry) {
-
-        requestCounter = Counter.builder("article.posts.requestcount")
-                .tag("version", "v1")
-                .description("Article Posts Counter")
-                .register(registry);
-
-        Gauge.builder("usercontroller.usercount",fetchUserCount()).
-                tag("version","v1").
-                description("usercontroller descrip").
-                register(registry);
-    }
 
     @Operation(summary="Get a Post by ID")
     @ApiResponses(value = {
@@ -54,7 +35,6 @@ public class ArticlePostsController {
     @GetMapping("/{id}")
     public Mono<ArticlePost> getArticlePostById(@PathVariable("id") Integer id) {
         log.info("ArticlePostsController:  controller (id={})", id);
-        requestCounter.increment();
 
         return articlePostService.getArticlePost(id)
                 .log()
@@ -76,11 +56,6 @@ public class ArticlePostsController {
         log.info("ArticlePostsController: getArticlePostByIdPlusNext controller (id={})", id);
 
         return articlePostService.getTwoArticlePosts(id).log();
-    }
-
-    // supplies user count
-    public Supplier<Number> fetchUserCount() {
-        return ()->4;
     }
 
 }
