@@ -18,14 +18,12 @@ public class TypicodeClient {
     private WebClient webClientTypicode;
 
     public Mono<ArticlePost> getPostById(int id) {
-        System.out.println(HttpStatus.NOT_FOUND.value());
-
         return webClientTypicode.get()
                         .uri("posts/" + id)
                         .retrieve()
                         .onStatus(HttpStatusCode::is4xxClientError, clientResponse -> Mono.error(new ArticleNotFoundException()))
                         //.onStatus(HttpStatusCode::is4xxClientError, clientResponse -> {throw new ArticleNotFoundException();})
-                        .bodyToMono(ArticlePost.class)
-                        .doOnNext(response -> log.info("Response from webClientTypiCode = {}", response));
+                        .bodyToMono(ArticlePost.class);
+                        //.doOnNext(response -> log.info("Response from webClientTypiCode = {}", response));
     }
 }
