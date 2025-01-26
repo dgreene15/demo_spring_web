@@ -22,9 +22,9 @@ public class MetricsCounter {
     MyService myService;
 
     public MetricsCounter(MeterRegistry registry) {
-        this.requestCounter = Counter.builder("article.posts.requestcount")
+        this.requestCounter = Counter.builder("metric.counter.requestcount")
                 .tag("version", "v1")
-                .description("Article Posts Counter")
+                .description("My Counter")
                 .register(registry);
 
         Gauge.builder("usercontroller.usercount",fetchUserCount()).
@@ -33,10 +33,10 @@ public class MetricsCounter {
                 register(registry);
     }
 
-    @GetMapping("/greet")
-    public String greet(@RequestParam String name) {
+    @GetMapping("/counter")
+    public String counter() {
         log.info("greeting");
-        return myService.greet(name);
+        return myService.greet("default");
     }
 
     // supplies user count
