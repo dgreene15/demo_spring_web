@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class MockitoWebClientTests {
-    WebClientDemo apiClient;
+    WebClientBuilder apiClient;
     @Mock
     private WebClient webClientMock;
     @Mock
@@ -30,7 +30,7 @@ public class MockitoWebClientTests {
 
     @BeforeEach
     void setUp() {
-        apiClient = new WebClientDemo(webClientMock);
+        apiClient = new WebClientBuilder(webClientMock);
     }
 
     @Test

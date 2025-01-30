@@ -11,11 +11,9 @@ import org.springframework.web.client.RestTemplate;
  * - below code keeps getting exception on IllegalArgumentException
  *      - did seperate app with same code and it worked, retry this once other dependencies removed
  */
-@SpringBootApplication
 public class RestTemplateDemo {
 
     public static void main(String[] args) {
-        SpringApplication.run(RestTemplateDemo.class, args);
 
         RestTemplate restTemplate = new RestTemplate();
         String url = "http://jsonplaceholder.typicode.com/users/1   ";

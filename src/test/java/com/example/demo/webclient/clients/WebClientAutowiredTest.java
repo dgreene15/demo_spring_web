@@ -10,15 +10,14 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class TypicodeClientTest {
+class WebClientAutowiredTest {
 
     @InjectMocks
-    TypicodeClient client;
+    WebClientAutowired client;
 
     @Mock
     WebClient webClientMock;

@@ -1,11 +1,10 @@
 package com.example.demo.webclient.services;
 
-import com.example.demo.webclient.clients.TypicodeClient;
+import com.example.demo.webclient.clients.WebClientAutowired;
 import com.example.demo.webclient.domain.ArticlePost;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -13,20 +12,20 @@ import reactor.core.publisher.Mono;
 public class ArticlePostService {
 
     @Autowired
-    TypicodeClient typicodeClient;
+    WebClientAutowired webClientAutowired;
 
     public Mono<ArticlePost> getArticlePost(Integer id) {
         log.info("getArticlePost: (id:{})", id);
 
-        return typicodeClient.getPostById(id)
+        return webClientAutowired.getPostById(id)
                 .doOnError((e) -> Mono.empty());
     }
 
     public Mono<ArticlePost> getTwoArticlePosts(Integer id) {
         log.info("getTwoArticlePosts: (id:{})", id);
 
-        Mono<ArticlePost> articleFromId = typicodeClient.getPostById(id);
-        Mono<ArticlePost> articleFromIdPlusOne = typicodeClient.getPostById(++id);
+        Mono<ArticlePost> articleFromId = webClientAutowired.getPostById(id);
+        Mono<ArticlePost> articleFromIdPlusOne = webClientAutowired.getPostById(++id);
 
         return Mono.zip(articleFromId, articleFromIdPlusOne)
                 .flatMap(zipMono -> {

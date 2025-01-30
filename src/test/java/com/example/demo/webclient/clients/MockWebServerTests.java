@@ -43,7 +43,7 @@ public class MockWebServerTests {
             // setup client call to use base URL for mock server
             HttpUrl baseUrl = mockWebServer.url("/");
 
-            WebClientDemo client = new WebClientDemo(WebClient.builder(), baseUrl.toString());
+            WebClientBuilder client = new WebClientBuilder(WebClient.builder(), baseUrl.toString());
 
             // make client call which will get results from mock response
             Person response = client.getUserById();

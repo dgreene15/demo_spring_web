@@ -4,7 +4,6 @@ import com.example.demo.webclient.domain.ArticlePost;
 import com.example.demo.webclient.exceptions.ArticleNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -12,7 +11,7 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class TypicodeClient {
+public class WebClientAutowired {
 
     @Autowired
     private WebClient webClientTypicode;
