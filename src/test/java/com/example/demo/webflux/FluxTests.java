@@ -83,4 +83,54 @@ public class FluxTests {
                 .expectNext("a", "b", "c", "d")
                 .verifyComplete();
     }
+
+    @Test
+    public void concatWithTest() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
+
+        Flux<String> concatenatedFlux = flux1.concatWith(flux2);
+
+        StepVerifier.create(concatenatedFlux)
+                .expectNext("a", "b", "c", "d")
+                .verifyComplete();
+    }
+
+    @Test
+    public void zipTest() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
+
+        Flux<String> zippedFlux = Flux.zip(flux1, flux2, (s1, s2) -> s1 + s2);
+
+        StepVerifier.create(zippedFlux)
+                .expectNext("ac", "bd")
+                .verifyComplete();
+    }
+
+    @Test
+    public void zipTestTuples() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
+
+        Flux<String> zippedFlux = Flux.zip(flux1, flux2)
+                .map(tuple -> tuple.getT1() + tuple.getT2());
+
+        StepVerifier.create(zippedFlux)
+                .expectNext("ac", "bd")
+                .verifyComplete();
+    }
+
+    @Test
+    public void voidzipWithTest() {
+        Flux<String> flux1 = Flux.just("a", "b");
+        Flux<String> flux2 = Flux.just("c", "d");
+
+        Flux<String> zippedFlux = flux1.zipWith(flux2)
+                .map(tuple -> tuple.getT1() + tuple.getT2());
+
+        StepVerifier.create(zippedFlux)
+                .expectNext("ac", "bd")
+                .verifyComplete();
+    }
 }
