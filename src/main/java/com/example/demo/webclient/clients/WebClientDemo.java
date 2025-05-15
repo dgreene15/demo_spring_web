@@ -17,7 +17,7 @@ public class WebClientDemo {
                 .retrieve()
                 .bodyToMono(Person.class)
                 .block();
-        System.out.println(response.toString());
+        System.out.println("WebClientDemo.class: " + response.toString());
 
     }
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Profile;
 
 /**
  * RestClient
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * - synchronous and blocking
  */
 @SpringBootApplication
+@Profile("runner")
 public class RestClientDemo implements CommandLineRunner {
 
     @Autowired
@@ -25,6 +27,6 @@ public class RestClientDemo implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Person response = restClientService.getUserById(1);
 
-        System.out.println("Response: " + response);
+        System.out.println("CommandLineRunner ßRestClientDemo Response: " + response);
     }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Profile;
 
 /**
  * HttpInterface
@@ -17,6 +18,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 2. create configuration class to define beans (client)
  */
 @SpringBootApplication
+@Profile("runner")
 public class HttpInterfaceDemo implements CommandLineRunner {
 
     @Autowired
@@ -30,6 +32,6 @@ public class HttpInterfaceDemo implements CommandLineRunner {
     public void run(String... args) throws Exception {
         String response = myHttpInterfaceService.fetchData();
 
-        System.out.println("Response: " + response);
+        System.out.println("CommandLineRunner ßHttpInterfaceDemo.class Response: " + response);
     }
 }

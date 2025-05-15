@@ -20,7 +20,7 @@ public class RestTemplateDemo {
 
         try {
             ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
-            System.out.println(response.getBody());
+            System.out.println("RestTemplateDemo.class: " + response.getBody());
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage());
         }
