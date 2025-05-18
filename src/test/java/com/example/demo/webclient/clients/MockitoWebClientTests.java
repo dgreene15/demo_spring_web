@@ -42,7 +42,7 @@ public class MockitoWebClientTests {
         when(requestHeadersMock.retrieve()).thenReturn(responseMock);
         when(responseMock.bodyToMono(Person.class)).thenReturn(Mono.just(mockPerson));
 
-        Person actualPerson = apiClient.getUserById();
+        Person actualPerson = apiClient.getUserById(1);
 
         assertThat(actualPerson).isEqualTo(mockPerson);
     }

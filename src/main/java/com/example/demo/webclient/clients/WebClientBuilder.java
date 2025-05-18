@@ -15,12 +15,12 @@ public class WebClientBuilder {
         this.webClient = builder.baseUrl(baseURL).build();
     }
 
-    public Person getUserById() {
+    public Person getUserById(int id) {
         // https://jsonplaceholder.typicode.com/users/1
         // WebClient client = WebClient.builder()
         //         .baseUrl("https://jsonplaceholder.typicode.com/").build();
         return webClient.get()
-                .uri("/users/1")
+                .uri("/users/" + id)
                 .retrieve()
                 .bodyToMono(Person.class)
                 .block();

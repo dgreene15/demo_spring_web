@@ -3,6 +3,7 @@ package com.example.demo.webclient.clients;
 import com.example.demo.webclient.domain.Person;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.jupiter.api.Test;
 import okhttp3.mockwebserver.MockResponse;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * MockWebServer (okhttp)
@@ -19,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MockWebServerTests {
 
     @Test
-    public void testMockWebServer() throws IOException {
+    public void testMockWebServer() throws IOException, InterruptedException {
         // start mock server
         try (MockWebServer mockWebServer = new MockWebServer()) {
             mockWebServer.start();
@@ -46,11 +48,22 @@ public class MockWebServerTests {
             WebClientBuilder client = new WebClientBuilder(WebClient.builder(), baseUrl.toString());
 
             // make client call which will get results from mock response
-            Person response = client.getUserById();
-            Person response2 = client.getUserById();
+            Person response = client.getUserById(1);
+            RecordedRequest recordedRequest1 = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
+
+            Person response2 = client.getUserById(2);
+            RecordedRequest recordedRequest2 = mockWebServer.takeRequest(1, TimeUnit.SECONDS);
 
             // shutdown server
             mockWebServer.shutdown();
+
+            assertNotNull(recordedRequest1);
+            assertThat(recordedRequest1.getMethod()).isEqualTo("GET");
+            assertThat(recordedRequest1.getPath()).isEqualTo("/users/1");
+
+            assertNotNull(recordedRequest2);
+            assertThat(recordedRequest2.getMethod()).isEqualTo("GET");
+            assertThat(recordedRequest2.getPath()).isEqualTo("/users/2");
 
             assertThat(baseUrl.toString()).isEqualTo("http://localhost:" + mockWebServer.getPort() + "/");
             assertThat(response.getId()).isEqualTo(1);

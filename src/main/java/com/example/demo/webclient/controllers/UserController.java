@@ -16,7 +16,7 @@ public class UserController {
     @GetMapping("/users")
     public Person getUsers() {
         WebClientBuilder client = new WebClientBuilder(WebClient.builder(),  baseURL);
-        Person response = client.getUserById();
+        Person response = client.getUserById(1);
         System.out.println(response.toString());
         return response;
     }
