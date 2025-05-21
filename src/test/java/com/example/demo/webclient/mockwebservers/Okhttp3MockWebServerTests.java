@@ -1,5 +1,6 @@
-package com.example.demo.webclient.clients;
+package com.example.demo.webclient.mockwebservers;
 
+import com.example.demo.webclient.clients.WebClientBuilder;
 import com.example.demo.webclient.domain.Person;
 import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockWebServer;
@@ -16,12 +17,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
  * MockWebServer (okhttp)
- *
+ * okhttp3 is a fully-featured HTTP client
+ * Has a component called mockwebserver to create local, fake HTTP server that test code can interact with.
  */
-public class MockWebServerTests {
+public class Okhttp3MockWebServerTests {
 
+    /**
+     * MockWebServer enqueue
+     * Useful for defining sequence of responses
+     */
     @Test
-    public void testMockWebServer() throws IOException, InterruptedException {
+    public void mockUsingEnqueue() throws IOException, InterruptedException {
         // start mock server
         try (MockWebServer mockWebServer = new MockWebServer()) {
             mockWebServer.start();
