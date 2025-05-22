@@ -3,6 +3,7 @@ package com.example.demo.wiremock;
 import com.example.demo.webclient.WebclientApplication;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.junit5.WireMockTest;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * webEnvironment is needed for TestRestTemplate
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = WebclientApplication.class)
-@WireMockTest(httpPort = 8080) // Starts WireMock on port 8080 for this test
+@WireMockTest(httpPort = 8090) // Starts WireMock on port 8080 for this test
 public class WireMockTests {
 
 
@@ -36,7 +37,7 @@ public class WireMockTests {
         stubFor(get(urlEqualTo("/api/users/123"))
                 .willReturn(okJson("{\"id\": 123, \"name\": \"John Doe\"}")));
 
-        String externalServiceUrl = "http://localhost:8080/api/users/123";
+        String externalServiceUrl = "http://localhost:8090/api/users/123";
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(externalServiceUrl))
@@ -59,7 +60,7 @@ public class WireMockTests {
                         .withHeader("Content-Type", "application/json")
                         .withBody("{\"status\": \"processed\"}")));
 
-        String externalServiceUrl = "http://localhost:8080/api/process";
+        String externalServiceUrl = "http://localhost:8090/api/process";
         RestTemplate restTemplate = new RestTemplate();
         String requestBody = "{\"data\": \"test\"}";
         HttpHeaders headers = new HttpHeaders();
