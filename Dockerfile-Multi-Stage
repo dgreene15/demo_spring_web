@@ -1,0 +1,15 @@
+# Build Stage - Compiling Java Code
+# COPY, copies everything
+# to run, bind 8080:8080 in Intelij run confirguration
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN ./mvnw clean package -DskipTests
+
+# Runtime Stage - Slimmer Image
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+COPY --from=builder /app/target/webclient-0.0.1-SNAPSHOT.jar demo-app.jar
+
+EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "demo-app.jar"]

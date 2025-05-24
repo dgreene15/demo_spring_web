@@ -20,18 +20,6 @@
 * http://localhost:8080/actuator
 * http://localhost:8080/actuator/prometheus
 
-## Next Steps
-* add Themeleaf here
-* Move Mongodb to a different repo
-* Mongodb create crud operators for article
-* Continue to merge other github project content over so can delete the other GitHub project
-* Create various test classes to demonstrate concepts.
-* Experiment with two webclient calls where either can fail.  Check on doOnError behaviour.
-* Try a test with webclient with subscribe to see if it makes the call with example from site below:
-  * https://www.concretepage.com/spring-5/spring-webflux-controller
-* Tutorials
-* https://www.baeldung.com/start-here
-* https://www.baeldung.com/get-started-with-java-series
-
-
+## Notes
+* Create Wrapper (mvnw): mvn -N wrapper:wrapper
 

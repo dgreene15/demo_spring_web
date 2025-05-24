@@ -1,3 +1,5 @@
+# to run, bind 8080:8080 in Intelij run confirguration
+
 FROM eclipse-temurin:21-jdk-alpine
 
 WORKDIR /app

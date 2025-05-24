@@ -1,0 +1,21 @@
+# Step 1: Build stage - Compile and extract layers
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /app
+COPY . .
+RUN ./mvnw clean package -DskipTests
+
+# Extract Spring Boot layers from the JAR
+RUN java -Djarmode=layertools -jar target/webclient-0.0.1-SNAPSHOT.jar extract
+
+# Step 2: Runtime stage - Create lean image
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
+
+# Copy extracted layers separately to maximize Docker layer caching
+COPY --from=builder /app/dependencies/ ./
+COPY --from=builder /app/snapshot-dependencies/ ./
+COPY --from=builder /app/spring-boot-loader/ ./
+COPY --from=builder /app/application/ ./
+
+EXPOSE 8080
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
